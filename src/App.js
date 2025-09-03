@@ -3,6 +3,8 @@ import "./App.css";
 import Header from "./Header";
 import Home from "./Home";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
+import Standings from "./Standings";
+import Tournament from "./Tournament";
 
 function App() {
   return (
@@ -12,20 +14,13 @@ function App() {
           <Header />
           <Routes>
             <Route path="/" element={<Home />} />
+            <Route path="/standings" element={<Standings />} />
+            <Route path="/Tournament" element={<Tournament />} />
           </Routes>
         </BrowserRouter>
-        <img src={logo} className="App-logo" alt="logo" />
         <p>
           Edit <code>src/App.js</code> and save to reload.
         </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
       </header>
     </div>
   );

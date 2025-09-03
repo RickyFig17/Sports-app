@@ -1,9 +1,13 @@
 import React from "react";
+import Navbar from "./Navbar";
 
 function Header() {
-    return (
-        <h1>Sports App</h1>
-    )
+  return (
+    <div>
+      <h1>Sports App</h1>
+      <Navbar />
+    </div>
+  );
 }
 
 export default Header;
