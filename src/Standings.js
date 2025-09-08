@@ -4,34 +4,39 @@ import Paper from "@mui/material/Paper";
 
 const columns: GridColDef[] = [
   { field: "id", headerName: "ID", width: 70 },
-  { field: "firstName", headerName: "First name", width: 130 },
-  { field: "lastName", headerName: "Last name", width: 130 },
+  { field: "team", headerName: "Team", width: 100 },
+  { field: "points", headerName: "Points", type: Number, width: 90 },
   {
-    field: "age",
-    headerName: "Age",
-    type: "number",
+    field: "wins",
+    headerName: "Wins",
+    type: Number,
     width: 90,
   },
   {
-    field: "fullName",
-    headerName: "Full name",
-    description: "This column has a value getter and is not sortable.",
-    sortable: false,
-    width: 160,
-    valueGetter: (value, row) => `${row.firstName || ""} ${row.lastName || ""}`,
+    field: "loses",
+    headerName: "Loses",
+    type: Number,
+    width: 90,
+  },
+  {
+    field: "tengamestreak",
+    headerName: "Last 10 Games",
+    type: Number,
+    width: 130,
+    // valueGetter: (value, row) => `${row.firstName || ""} ${row.lastName || ""}`,
   },
 ];
 
 const rows = [
-  { id: 1, lastName: "Snow", firstName: "Jon", age: 35 },
-  { id: 2, lastName: "Lannister", firstName: "Cersei", age: 42 },
-  { id: 3, lastName: "Lannister", firstName: "Jaime", age: 45 },
-  { id: 4, lastName: "Stark", firstName: "Arya", age: 16 },
-  { id: 5, lastName: "Targaryen", firstName: "Daenerys", age: null },
-  { id: 6, lastName: "Melisandre", firstName: null, age: 150 },
-  { id: 7, lastName: "Clifford", firstName: "Ferrara", age: 44 },
-  { id: 8, lastName: "Frances", firstName: "Rossini", age: 36 },
-  { id: 9, lastName: "Roxie", firstName: "Harvey", age: 65 },
+  { id: 1, team: "Bruins", points: 0, wins: 0, loses: 0, tengamestreak: 0 },
+  { id: 2, team: "Rangers", points: 0, wins: 0, loses: 0, tengamestreak: 0 },
+  { id: 3, team: "Islanders", points: 0, wins: 0, loses: 0, tengamestreak: 0 },
+  { id: 4, team: "Flames", points: 0, wins: 0, loses: 0, tengamestreak: 0 },
+  { id: 5, team: "Stars", points: 0, wins: 0, loses: 0, tengamestreak: 0 },
+  { id: 6, team: "Oilers", points: 0, wins: 0, loses: 0, tengamestreak: 0 },
+  { id: 7, team: "Kings", points: 0, wins: 0, loses: 0, tengamestreak: 0 },
+  { id: 8, team: "Predators", points: 0, wins: 0, loses: 0, tengamestreak: 0 },
+  { id: 9, team: "Panthers", points: 0, wins: 0, loses: 0, tengamestreak: 0 },
 ];
 
 const paginationModel = { page: 0, pageSize: 5 };

@@ -9,6 +9,9 @@ function Navbar() {
         <li>
             <Link to="/">Home</Link>
         </li>
+        <li>
+            <Link to="/matches">Matches</Link>
+        </li>
          <li>
             <Link to="/tournament">Tournament</Link>
         </li>
