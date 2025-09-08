@@ -21,11 +21,31 @@ function Standings({ standings }) {
       type: "number",
       width: 90,
     },
+
     {
-      field: "tengamestreak",
-      headerName: "Last 10 Games",
+      field: "pointsfor",
+      headerName: "Points For",
       type: "number",
-      width: 130,
+      width: 90,
+    },
+
+    {
+      field: "pointsagainst",
+      headerName: "Points Against",
+      type: "number",
+      width: 90,
+    },
+    {
+      field: "suddendeathloses",
+      headerName: "SDL",
+      type: "number",
+      width: 90,
+    },
+    {
+      field: "plusminus",
+      headerName: "+/-",
+      type: "number",
+      width: 90,
     },
   ];
 
@@ -35,7 +55,10 @@ function Standings({ standings }) {
     points: team.points,
     wins: team.wins,
     loses: team.loses,
-    tengamestreak: team.tengamestreak,
+    pointsfor: team.pointsfor,
+    pointsagainst: team.pointsagainst,
+    suddendeathloses: team.suddendeathloses,
+    plusminus: team.plusminus,
   }));
 
   return (
@@ -46,10 +69,14 @@ function Standings({ standings }) {
         <DataGrid
           rows={rows}
           columns={columns}
-          // initialState={{ pagination: { paginationModel } }}
           pageSizeOptions={[5, 10]}
-          checkboxSelection
           sx={{ border: 0 }}
+          disableRowSelectionOnClick
+          initialState={{
+            sorting: {
+              sortModel: [{ field: "points", sort: "desc" }],
+            },
+          }}
         />
       </Paper>
     </div>

@@ -26,7 +26,9 @@ function App() {
       points: 0,
       wins: 0,
       loses: 0,
-      tengamestreak: 0,
+      pointsfor: 0,
+      pointsagainst: 0,
+      plusminus: 0
     }))
   );
 
