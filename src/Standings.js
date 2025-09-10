@@ -65,12 +65,11 @@ function Standings({ standings }) {
     <div>
       <h1>Standings</h1>
 
-      <Paper sx={{ height: 400, width: "100%" }}>
+      <Paper>
         <DataGrid
           rows={rows}
           columns={columns}
           pageSizeOptions={[5, 10]}
-          sx={{ border: 0 }}
           disableRowSelectionOnClick
           initialState={{
             sorting: {

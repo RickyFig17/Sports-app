@@ -28,22 +28,60 @@ function App() {
       loses: 0,
       pointsfor: 0,
       pointsagainst: 0,
-      plusminus: 0
+      suddendeathloses: 0,
+      plusminus: 0,
     }))
   );
 
-  const handleMatchResult = ({ teamA, teamB, winner }) => {
+  const handleMatchResult = ({
+    teamA,
+    teamB,
+    scoreA,
+    scoreB,
+    winner,
+    isSuddenDeath,
+  }) => {
     setStandings((prev) =>
       prev.map((team) => {
-        if (team.name === winner) {
-          return { ...team, wins: team.wins + 1 };
+        if (team.name === teamA) {
+          return {
+            ...team,
+            wins: team.name === winner ? team.wins + 1 : team.wins,
+            loses: team.name !== winner ? team.loses + 1 : team.loses,
+            suddendeathloses:
+              team.name !== winner && isSuddenDeath
+                ? team.suddendeathloses + 1
+                : team.suddendeathloses,
+            points:
+              team.name === winner
+                ? team.points + 3
+                : isSuddenDeath
+                ? team.points + 1
+                : team.points,
+            pointsfor: team.pointsfor + scoreA,
+            pointsagainst: team.pointsagainst + scoreB,
+          };
         }
-        if (
-          (team.name === teamA || team.name === teamB) &&
-          team.name !== winner
-        ) {
-          return { ...team, loses: team.loses + 1 };
+        if (team.name === teamB) {
+          return {
+            ...team,
+            wins: team.name === winner ? team.wins + 1 : team.wins,
+            loses: team.name !== winner ? team.loses + 1 : team.loses,
+            suddendeathloses:
+              team.name !== winner && isSuddenDeath
+                ? team.suddendeathloses + 1
+                : team.suddendeathloses,
+            points:
+              team.name === winner
+                ? team.points + 3
+                : isSuddenDeath
+                ? team.points + 1
+                : team.points,
+            pointsfor: team.pointsfor + scoreB,
+            pointsagainst: team.pointsagainst + scoreA,
+          };
         }
+
         return team;
       })
     );

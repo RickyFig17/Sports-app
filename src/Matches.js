@@ -4,7 +4,6 @@ import "./Matches.scss";
 function Matches({ teams, onMatchResult }) {
   const [teamA, setTeamA] = useState("");
   const [teamB, setTeamB] = useState("");
-  // const [winner, setWinner] = useState("");
   const [message, setMessage] = useState("");
 
   const simulateMatch = () => {
@@ -17,42 +16,24 @@ function Matches({ teams, onMatchResult }) {
     const scoreB = Math.floor(Math.random() * 17);
     let winner = null;
     let msg = `${teamA} ${scoreA} - ${scoreB} ${teamB}`;
+    let isSuddenDeath = false;
 
-    if (scoreA === 16 && scoreB !== 16) {
-      winner = teamA;
-      msg += `${teamA} Win!`;
-    } else if (scoreB === 16 && scoreA !== 16) {
-      winner = teamB;
-      msg += `${teamB} Win!`;
-    } else if (scoreA > scoreB) {
-      winner = teamA;
-      msg += `${teamA} Win!`;
-    } else if (scoreB > scoreA) {
-      winner = teamB;
-      msg += `${teamB} Win!`;
-    } else {
+    if (scoreA === scoreB) {
+      isSuddenDeath = true;
       winner = Math.random() < 0.5 ? teamA : teamB;
-      msg += `${winner} Wins! (Sudden Death)`;
+      msg += `${winner} Wins! (Sudden death) (${scoreA}-${scoreB})`;
+    } else {
+      winner = scoreA > scoreB ? teamA : teamB;
+      msg += `${winner} Wins! Final Score: ${scoreA} - ${scoreB}`;
     }
 
     setMessage(msg);
-    onMatchResult({ teamA, teamB, winner });
+    onMatchResult({ teamA, teamB, scoreA, scoreB, winner, isSuddenDeath });
   };
-
-  // const handleSubmit = (e) => {
-  //   e.preventDefault();
-  //   if (!teamA || !teamB || !winner || teamA === teamB) return;
-
-  //   onMatchResult({ teamA, teamB, winner });
-  //   setTeamA("");
-  //   setTeamB("");
-  //   // setWinner("");
-  // };
 
   return (
     <div>
       <h1>Matches</h1>
-      {/* <form onSubmit={handleSubmit}> */}
       <select value={teamA} onChange={(e) => setTeamA(e.target.value)}>
         <option value="">Select Team A</option>
         {teams?.map((t) => (
@@ -71,18 +52,7 @@ function Matches({ teams, onMatchResult }) {
         ))}
       </select>
 
-      {/* <select value={winner} onChange={(e) => setWinner(e.target.value)}>
-          <option value="">Select Winner</option>
-          {[teamA, teamB].filter(Boolean).map((t) => (
-            <option key={t} value={t}>
-              {t}
-            </option>
-          ))}
-        </select> */}
-
       <button onClick={simulateMatch}>Simulate Match</button>
-      {/* </form> */}
-      {/* <Matches teams={initialTeams} onMatchResult={handleMatchResult} /> */}
       {message && (
         <div style={{ marginTop: "10px", whiteSpace: "pre-line" }}>
           <strong>{message}</strong>
