@@ -94,14 +94,23 @@ function App() {
           <Header />
           <Routes>
             <Route path="/" element={<Home />} />
-            <Route path="/matches" element={<Matches />} />
-            <Route path="/standings" element={<Standings />} />
+            <Route
+              path="/matches"
+              element={
+                <Matches
+                  teams={initialTeams}
+                  onMatchResult={handleMatchResult}
+                />
+              }
+            />
+            <Route
+              path="/standings"
+              element={<Standings standings={standings} />}
+            />
             <Route path="/Tournament" element={<Tournament />} />
           </Routes>
         </BrowserRouter>
       </header>
-      <Matches teams={initialTeams} onMatchResult={handleMatchResult} />
-      <Standings standings={standings} />
     </div>
   );
 }
