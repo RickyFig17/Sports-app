@@ -69,7 +69,7 @@ function Standings({ standings }) {
         <DataGrid
           rows={rows}
           columns={columns}
-          pageSizeOptions={[5, 10]}
+          pageSizeOptions={[5, 20]}
           disableRowSelectionOnClick
           initialState={{
             sorting: {

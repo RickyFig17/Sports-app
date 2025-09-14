@@ -10,14 +10,21 @@ import React, { useState } from "react";
 function App() {
   const initialTeams = [
     "Bruins",
-    "Rangers",
-    "Islanders",
-    "Flames",
-    "Stars",
-    "Oilers",
-    "Kings",
-    "Predators",
-    "Panthers",
+  "Rangers",
+  "Islanders",
+  "Flames",
+  "Stars",
+  "Oilers",
+  "Kings",
+  "Predators",
+  "Panthers",
+  "Flyers",
+  "Sharks",
+  "Canucks",
+  "Jets",
+  "Avalanche",
+  "Wild",
+  "Lightning",
   ];
 
   const [standings, setStandings] = useState(
