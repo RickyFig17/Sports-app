@@ -6,6 +6,7 @@ import Standings from "./Standings";
 import Tournament from "./Tournament";
 import Matches from "./Matches";
 import React, { useState } from "react";
+import Playoffs from "./Playoffs";
 
 function App() {
   const initialTeams = [
@@ -115,6 +116,7 @@ function App() {
               element={<Standings standings={standings} />}
             />
             <Route path="/Tournament" element={<Tournament />} />
+            <Route path="/playoffs" element={<Playoffs />} />
           </Routes>
         </BrowserRouter>
       </header>

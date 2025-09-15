@@ -12,6 +12,9 @@ function Navbar() {
         <li>
             <Link to="/matches">Matches</Link>
         </li>
+        <li>
+            <Link to="/playoffs">Playoffs</Link>
+        </li>
          <li>
             <Link to="/tournament">Tournament</Link>
         </li>

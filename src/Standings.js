@@ -3,6 +3,7 @@ import { useState } from "react";
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
 import Paper from "@mui/material/Paper";
 import Matches from "./Matches";
+import { styled } from "@mui/material/styles";
 
 function Standings({ standings }) {
   const columns = [
@@ -17,11 +18,16 @@ function Standings({ standings }) {
     },
     {
       field: "loses",
-      headerName: "Loses",
+      headerName: "Losses",
       type: "number",
       width: 90,
     },
-
+    {
+      field: "suddendeathloses",
+      headerName: "SDL",
+      type: "number",
+      width: 90,
+    },
     {
       field: "pointsfor",
       headerName: "Points For",
@@ -32,12 +38,6 @@ function Standings({ standings }) {
     {
       field: "pointsagainst",
       headerName: "Points Against",
-      type: "number",
-      width: 90,
-    },
-    {
-      field: "suddendeathloses",
-      headerName: "SDL",
       type: "number",
       width: 90,
     },
@@ -55,10 +55,16 @@ function Standings({ standings }) {
     points: team.points,
     wins: team.wins,
     loses: team.loses,
+    suddendeathloses: team.suddendeathloses,
     pointsfor: team.pointsfor,
     pointsagainst: team.pointsagainst,
-    suddendeathloses: team.suddendeathloses,
     plusminus: team.plusminus,
+  }));
+
+  const StyledDataGrid = styled(DataGrid)(({ theme }) => ({
+    "& .MuiDataGrid-row.red-divider": {
+      borderBottom: "3px solid red",
+    },
   }));
 
   return (
@@ -66,7 +72,7 @@ function Standings({ standings }) {
       <h1>Standings</h1>
 
       <Paper>
-        <DataGrid
+        <StyledDataGrid
           rows={rows}
           columns={columns}
           pageSizeOptions={[5, 20]}
@@ -75,6 +81,16 @@ function Standings({ standings }) {
             sorting: {
               sortModel: [{ field: "points", sort: "desc" }],
             },
+          }}
+          getRowClassName={(params) => {
+            const totalGames = standings.reduce(
+              (sum, t) => sum + t.wins + t.loses,
+              0
+            );
+            if (totalGames >= 8 && params.indexRelativeToCurrentPage === 7) {
+              return "red-divider";
+            }
+            return "";
           }}
         />
       </Paper>
