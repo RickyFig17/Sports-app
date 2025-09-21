@@ -42,58 +42,76 @@ function App() {
   );
 
   const handleMatchResult = ({
-    teamA,
-    teamB,
-    scoreA,
-    scoreB,
-    winner,
-    isSuddenDeath,
-  }) => {
-    setStandings((prev) =>
-      prev.map((team) => {
-        if (team.name === teamA) {
-          return {
-            ...team,
-            wins: team.name === winner ? team.wins + 1 : team.wins,
-            loses: team.name !== winner ? team.loses + 1 : team.loses,
-            suddendeathloses:
-              team.name !== winner && isSuddenDeath
-                ? team.suddendeathloses + 1
-                : team.suddendeathloses,
-            points:
-              team.name === winner
-                ? team.points + 3
-                : isSuddenDeath
-                ? team.points + 1
-                : team.points,
-            pointsfor: team.pointsfor + scoreA,
-            pointsagainst: team.pointsagainst + scoreB,
-          };
-        }
-        if (team.name === teamB) {
-          return {
-            ...team,
-            wins: team.name === winner ? team.wins + 1 : team.wins,
-            loses: team.name !== winner ? team.loses + 1 : team.loses,
-            suddendeathloses:
-              team.name !== winner && isSuddenDeath
-                ? team.suddendeathloses + 1
-                : team.suddendeathloses,
-            points:
-              team.name === winner
-                ? team.points + 3
-                : isSuddenDeath
-                ? team.points + 1
-                : team.points,
-            pointsfor: team.pointsfor + scoreB,
-            pointsagainst: team.pointsagainst + scoreA,
-          };
+  teamA,
+  teamB,
+  scoreA,
+  scoreB,
+  winner,
+  isSuddenDeath,
+}) => {
+  setStandings((prev) =>
+    prev.map((team) => {
+      if (team.name === teamA) {
+        let wins = team.wins;
+        let loses = team.loses;
+        let suddendeathloses = team.suddendeathloses;
+        let points = team.points;
+
+        if (team.name === winner) {
+          wins = team.wins + 1;
+          points = team.points + 3;
+        } else {
+          loses = team.loses + 1;
+          if (isSuddenDeath) {
+            suddendeathloses = team.suddendeathloses + 1;
+            points = team.points + 1;
+          }
         }
 
-        return team;
-      })
-    );
-  };
+        return {
+          ...team,
+          wins,
+          loses,
+          suddendeathloses,
+          points,
+          pointsfor: team.pointsfor + scoreA,
+          pointsagainst: team.pointsagainst + scoreB,
+        };
+      }
+
+      if (team.name === teamB) {
+        let wins = team.wins;
+        let loses = team.loses;
+        let suddendeathloses = team.suddendeathloses;
+        let points = team.points;
+
+        if (team.name === winner) {
+          wins = team.wins + 1;
+          points = team.points + 3;
+        } else {
+          loses = team.loses + 1;
+          if (isSuddenDeath) {
+            suddendeathloses = team.suddendeathloses + 1;
+            points = team.points + 1;
+          }
+        }
+
+        return {
+          ...team,
+          wins,
+          loses,
+          suddendeathloses,
+          points,
+          pointsfor: team.pointsfor + scoreB,
+          pointsagainst: team.pointsagainst + scoreA,
+        };
+      }
+
+      return team;
+    })
+  );
+};
+
 
   return (
     <div className="App">
